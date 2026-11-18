@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#062c25">
+<title>¡Feliz Navidad! | Dirección de Telemática</title>
+
+<!-- Importar la fuente Lobster desde Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+
+<style>
+:root{--gold:#ffd76a;--cream:#fff8e9;--green:#073c31}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:#fff}
+body{min-height:100vh;overflow-x:hidden;background:radial-gradient(ellipse at 50% 40%,#17664c 0%,#0b4939 35%,#062b27 75%,#031b20 100%);position:relative}
+body:before{content:"";position:fixed;inset:-20%;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 25% 30%,#48a96b 0,transparent 40%),radial-gradient(ellipse at 75% 65%,#b78635 0,transparent 35%);opacity:.2;filter:blur(30px);will-change:transform;animation:aurora 20s ease-in-out infinite alternate}
+@keyframes aurora{to{transform:scale(1.05)}}
+main{position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column;align-items:center;text-align:center;padding:50px 16px 36px}
+
+/* Título interactivo para controlar el audio */
+h1{max-width:1000px;margin:10px auto 6px;font-family:Georgia,serif;font-size:clamp(1.8rem,4.5vw,3.5rem);line-height:1.15;color:#fff4c9;text-shadow:0 2px 0 #8a4d18,0 0 15px #ffd76a66;cursor:pointer;user-select:none;transition:transform .2s ease}
+h1:active{transform:scale(0.98)}
+.music-hint{font-size:.7rem;display:block;color:#ffe9a5;margin-top:4px;opacity:.85;font-family:system-ui,sans-serif;font-weight:normal}
+
+.greeting{font-family:Georgia,serif;color:#ffe9a5;font-size:clamp(0.95rem,2.2vw,1.15rem);margin:0 auto 10px}
+.light-wire{position:fixed;z-index:8;top:0;left:0;width:100%;height:26px;display:flex;justify-content:space-around;pointer-events:none}
+.bulb{width:10px;height:15px;border-radius:50% 50% 45% 45%;background:#ffda63;box-shadow:0 0 8px currentColor;animation:blink 1.4s infinite alternate;will-change:opacity}
+.bulb:nth-child(7n+1){background:#ff3030;box-shadow:0 0 10px #ff3030;animation-delay:.2s}
+.bulb:nth-child(7n+2){background:#39ff75;box-shadow:0 0 10px #39ff75;animation-delay:.5s}
+.bulb:nth-child(7n+3){background:#ffe44d;box-shadow:0 0 10px #ffe44d;animation-delay:.8s}
+.bulb:nth-child(7n+4){background:#48bfff;box-shadow:0 0 10px #48bfff;animation-delay:.3s}
+.bulb:nth-child(7n+5){background:#d77aff;box-shadow:0 0 10px #d77aff;animation-delay:1s}
+.bulb:nth-child(7n+6){background:#ff8c42;box-shadow:0 0 10px #ff8c42;animation-delay:.6s}
+.bulb:nth-child(7n){background:#fff;box-shadow:0 0 10px #fff;animation-delay:.9s}
+@keyframes blink{from{opacity:.3}to{opacity:1}}
+
+/* Adornos navideños optimizados */
+.decor{position:fixed;z-index:1;font-size:clamp(22px,2.5vw,36px);opacity:.85;pointer-events:none;filter:drop-shadow(0 0 4px #fff5b8);animation:drift 5s ease-in-out infinite alternate;will-change:transform}
+.decor.one{left:4%;top:25%;animation-delay:0s}
+.decor.two{right:5%;top:35%;animation-delay:1s}
+.decor.three{left:8%;bottom:18%;animation-delay:2s}
+.decor.four{right:9%;bottom:22%;animation-delay:.5s}
+.decor.five{left:15%;top:50%;animation-delay:1.5s}
+.decor.six{right:15%;top:18%;animation-delay:2.5s}
+@keyframes drift{from{transform:translateY(0) rotate(-6deg)}to{transform:translateY(-15px) rotate(8deg)}}
+
+/* Escena del pesebre */
+.nativity-scene{position:relative;width:min(620px,92vw);margin:6px auto 0;filter:drop-shadow(0 12px 18px #001b1888);will-change:transform}
+.nativity-scene>.manger{display:block;width:100%;height:auto;max-height:55vh;object-fit:contain}
+
+.baby-trigger{position:absolute;z-index:6;left:50%;top:74%;width:26%;padding:0;border:0;background:transparent;cursor:pointer;opacity:0;visibility:hidden;transform:translate(-50%,-50%) scale(.3);filter:drop-shadow(0 0 0 rgba(255,221,130,0))}
+.baby-trigger img{display:block;width:100%;height:auto}
+.baby-trigger.show{visibility:visible;animation:babyArrival 1.1s cubic-bezier(.16,.85,.25,1.2) forwards}
+.baby-trigger:focus-visible{outline:2px solid #ffe58a;outline-offset:6px;border-radius:16px}
+@keyframes babyArrival{0%{opacity:0;transform:translate(-50%,-50%) scale(.2) rotate(-10deg)}70%{opacity:1;transform:translate(-50%,-50%) scale(1.08) rotate(3deg)}100%{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(0);filter:drop-shadow(0 0 10px #ffe58a)}}
+
+.baby-message{position:absolute;z-index:6;left:50%;top:91%;transform:translate(-50%,-50%) scale(.6);font-family:Georgia,serif;font-size:clamp(0.75rem,1.8vw,1rem);color:#fff4c9;background:rgba(7,60,49,.9);padding:4px 10px;border-radius:12px;border:1px solid #ffd76a;box-shadow:0 0 8px rgba(255,215,106,.3);white-space:nowrap;opacity:0;visibility:hidden;pointer-events:none}
+.baby-message.show{visibility:visible;animation:messageArrival 1.1s cubic-bezier(.16,.85,.25,1.2) forwards;animation-delay:.1s}
+@keyframes messageArrival{0%{opacity:0;transform:translate(-50%,-30%) scale(.6)}70%{opacity:1;transform:translate(-50%,-50%) scale(1.03)}100%{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+
+/* Estrella fugaz */
+.star-flight{position:fixed;z-index:7;top:10%;left:-350px;width:clamp(200px,32vw,320px);display:none;pointer-events:none}
+.star-flight img{display:block;width:100%;height:auto;filter:drop-shadow(0 0 8px #ffd76a)}
+.star-flight.fly{display:block;animation:starJourney 7.5s cubic-bezier(.35,.05,.55,.95) forwards}
+@keyframes starJourney{0%{transform:translate3d(0,0,0) rotate(-5deg)}50%{transform:translate3d(52vw,-4vh,0) rotate(2deg)}100%{transform:translate3d(calc(100vw + 400px),2vh,0) rotate(5deg)}}
+
+/* Confeti ligero */
+.confetti-layer{position:absolute;z-index:8;inset:0;overflow:visible;pointer-events:none}
+.confetti-piece{position:absolute;left:50%;top:74%;width:var(--w);height:var(--h);border-radius:2px;background:var(--c);opacity:0;transform:translate(-50%,-50%);animation:confettiBurst 1.6s ease-out var(--delay) forwards}
+@keyframes confettiBurst{0%{opacity:0;transform:translate(-50%,-50%) scale(.3)}15%{opacity:1}100%{opacity:0;transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) rotate(var(--r)) scale(.7)}}
+
+.countdown-container{text-align:center;margin-top:12px;position:relative;z-index:4}
+.hint{font-size:.9rem;color:#d5efdf;margin:6px 0}
+.countdown{display:inline-flex;align-items:center;justify-content:center;width:74px;height:74px;margin:6px auto;border:3px solid #ffd76a;border-radius:50%;background:linear-gradient(145deg,#b98235,#76501e);color:#fff;font-size:2.4rem;font-weight:900;box-shadow:0 0 15px #ffd76a66;will-change:transform}
+.countdown-final{display:none;font-family:Georgia,serif;font-size:clamp(1.1rem,2.8vw,1.7rem);font-weight:bold;color:#ffe58a;text-shadow:0 0 10px #ffd76a;margin:12px 0 0}
+.countdown-final.active{display:block;animation:finalAppear 0.8s ease forwards}
+@keyframes finalAppear{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1)}}
+
+.sparkle{position:fixed;z-index:9;left:50%;top:70%;width:10px;height:10px;border-radius:50%;background:#fff5ad;box-shadow:0 0 15px 8px #ffe27b;opacity:0;pointer-events:none}
+.sparkle.burst{animation:burst .7s ease-out}
+@keyframes burst{0%{opacity:1;transform:scale(.2)}100%{opacity:0;transform:scale(7)}}
+
+.modal{position:fixed;z-index:20;inset:0;background:#001b19cc;display:none;place-items:center;padding:16px}
+.modal.open{display:grid;animation:fade .3s ease}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.letter{width:min(600px,94vw);max-height:85vh;overflow-y:auto;-webkit-overflow-scrolling:touch;position:relative;padding:clamp(20px,4vw,40px);border:6px double #c89b4b;border-radius:8px;color:#4d3422;background:repeating-linear-gradient(0deg,#fff8e9,#fff8e9 26px,#f7edda 27px);box-shadow:0 20px 50px #0008}
+
+.letter h2{font-family:'Lobster', cursive;color:#94631f;font-size:clamp(1.8rem,4vw,2.5rem);margin:0 0 14px;letter-spacing:1px}
+.letter p{font-family:'Lobster', cursive;font-size:clamp(1.1rem,2.2vw,1.3rem);line-height:1.5;margin:0 0 12px;font-weight:normal}
+.letter .signature{font-family:'Lobster', cursive;font-weight:normal;color:#176348;text-align:center;margin-top:18px;font-size:1.4rem}
+
+.close{display:block;margin:20px auto 0;border:0;border-radius:24px;padding:10px 22px;background:#94631f;color:#fff;font-weight:700;cursor:pointer;box-shadow:0 4px 10px #7d5a1533;font-family:system-ui,sans-serif}
+</style>
+</head>
+<body>
+
+<div class="light-wire" aria-hidden="true" id="lightWire"></div>
+
+<!-- Adornos navideños esenciales -->
+<div class="decor one" aria-hidden="true">🎁</div>
+<div class="decor two" aria-hidden="true">🔔</div>
+<div class="decor three" aria-hidden="true">⭐</div>
+<div class="decor four" aria-hidden="true">🍬</div>
+<div class="decor five" aria-hidden="true">🎄</div>
+<div class="decor six" aria-hidden="true">✨</div>
+
+<main>
+  <h1 id="mainTitle" title="Haz clic para reproducir la música">
+    ¡Feliz Navidad te desea la Dirección de Telemática!
+    <span class="music-hint" id="musicHint">(🔇 Música pausada - Clic para reproducir)</span>
+  </h1>
+  <p class="greeting">Que la luz de Belén ilumine nuestros hogares y renueve la esperanza.</p>
+
+  <div class="nativity-scene" id="nativityScene">
+    <img class="manger" src="pesebre.png" alt="Pesebre del nacimiento de Jesús">
+    <button class="baby-trigger" id="babyTrigger" type="button" aria-label="Abrir mensaje de Navidad">
+      <img src="nino-jesus.png" alt="Niño Jesús">
+    </button>
+    <span class="baby-message" id="babyMessage" aria-hidden="true">✨ Te traje esta carta ✨</span>
+    <div class="confetti-layer" id="confettiLayer" aria-hidden="true"></div>
+  </div>
+
+  <div class="countdown-container">
+    <p class="hint" id="countdownMessage">✨ La estrella de Belén anuncia una sorpresa en...</p>
+    <div class="countdown" id="countdown">6</div>
+    <p class="countdown-final" id="countdownFinal">Que la paz, la fe y la esperanza iluminen esta Navidad. ✨</p>
+  </div>
+</main>
+
+<div class="star-flight" id="starFlight" aria-hidden="true">
+  <img src="estrella-belen.png" alt="">
+</div>
+<div class="sparkle" id="sparkle" aria-hidden="true"></div>
+
+<div class="modal" id="letterModal" role="dialog" aria-modal="true" aria-labelledby="letterTitle">
+  <section class="letter">
+    <h2 id="letterTitle">Un mensaje lleno de buenos deseos</h2>
+    <p>En esta Navidad queremos hacer llegar nuestros mejores deseos a cada persona que forma parte de esta gran familia institucional.</p>
+    <p>Que la paz, la alegría y la unión llenen sus hogares; que cada sonrisa se convierta en un motivo para agradecer y que el nuevo año llegue cargado de salud, esperanza, nuevos proyectos y éxitos compartidos.</p>
+    <p>Gracias por su compromiso, dedicación y esfuerzo diario. Que la luz de estas fechas renueve nuestras energías para seguir construyendo juntos un futuro lleno de oportunidades.</p>
+    <p class="signature">¡Venga un abrazo de parte de la Dirección de Telemática!</p>
+    <button class="close" id="closeModal" type="button">Cerrar mensaje ✨</button>
+  </section>
+</div>
+
+<script>
+// Generar las 24 bombillas optimizadas automáticamente
+const lightWire = document.getElementById('lightWire');
+if (lightWire) {
+  for (let i = 0; i < 24; i++) {
+    const bulb = document.createElement('span');
+    bulb.className = 'bulb';
+    lightWire.appendChild(bulb);
+  }
+}
+
+(() => {
+  const starFlight = document.getElementById('starFlight');
+  const babyTrigger = document.getElementById('babyTrigger');
+  const babyMessage = document.getElementById('babyMessage');
+  const confettiLayer = document.getElementById('confettiLayer');
+  const modal = document.getElementById('letterModal');
+  const sparkle = document.getElementById('sparkle');
+  const countdown = document.getElementById('countdown');
+  const countdownMessage = document.getElementById('countdownMessage');
+  const countdownFinal = document.getElementById('countdownFinal');
+  const closeButton = document.getElementById('closeModal');
+  const mainTitle = document.getElementById('mainTitle');
+  const musicHint = document.getElementById('musicHint');
+
+  let usuarioReproduciendo = false;
+  const musicaFondo = new Audio('musica-fondo.mp3');
+  musicaFondo.loop = true;
+  musicaFondo.volume = 0.3;
+
+  const musicaNavidad = new Audio('musica-navidad.mp3');
+  musicaNavidad.loop = true;
+  musicaNavidad.volume = 0.65;
+  let temporizadorMusica = null;
+
+  function iniciarMusicaCarta() {
+    if (!usuarioReproduciendo) return;
+    clearTimeout(temporizadorMusica);
+    musicaFondo.pause();
+    musicaNavidad.pause();
+    musicaNavidad.currentTime = 0;
+    musicaNavidad.play().catch(() => {});
+    if (musicHint) musicHint.textContent = "(🎵 Tocando música de la carta - Clic para pausar)";
+    
+    temporizadorMusica = setTimeout(() => {
+      musicaNavidad.pause();
+      musicaNavidad.currentTime = 0;
+      if (usuarioReproduciendo) {
+        musicaFondo.play().catch(() => {});
+        if (musicHint) musicHint.textContent = "(🔊 Música activada - Clic para pausar)";
+      }
+    }, 120000);
+  }
+
+  function detenerMusicaCarta() {
+    clearTimeout(temporizadorMusica);
+    musicaNavidad.pause();
+    musicaNavidad.currentTime = 0;
+    if (usuarioReproduciendo) {
+      musicaFondo.play().catch(() => {});
+      if (musicHint) musicHint.textContent = "(🔊 Música activada - Clic para pausar)";
+    }
+  }
+
+  if (mainTitle) {
+    mainTitle.addEventListener('click', () => {
+      const modalAbierto = modal && modal.classList.contains('open');
+      if (usuarioReproduciendo) {
+        usuarioReproduciendo = false;
+        musicaFondo.pause();
+        musicaNavidad.pause();
+        clearTimeout(temporizadorMusica);
+        if (musicHint) musicHint.textContent = "(🔇 Música pausada - Clic para reproducir)";
+      } else {
+        usuarioReproduciendo = true;
+        if (modalAbierto) {
+          musicaNavidad.play().catch(() => {});
+          if (musicHint) musicHint.textContent = "(🎵 Tocando música de la carta - Clic para pausar)";
+        } else {
+          musicaFondo.play().catch(() => {});
+          if (musicHint) musicHint.textContent = "(🔊 Música activada - Clic para pausar)";
+        }
+      }
+    });
+  }
+
+  function lanzarConfeti() {
+    if (!confettiLayer) return;
+    confettiLayer.innerHTML = '';
+    const colores = ['#ffe08a', '#fff5d6', '#d9a441', '#f7c95c', '#ffffff'];
+    for (let i = 0; i < 35; i++) {
+      const pieza = document.createElement('span');
+      const angulo = Math.random() * Math.PI * 2;
+      const distancia = 50 + Math.random() * 110;
+      pieza.className = 'confetti-piece';
+      pieza.style.setProperty('--x', `${Math.cos(angulo) * distancia}px`);
+      pieza.style.setProperty('--y', `${Math.sin(angulo) * distancia}px`);
+      pieza.style.setProperty('--r', `${Math.random() * 600 - 300}deg`);
+      pieza.style.setProperty('--w', `${4 + Math.random() * 4}px`);
+      pieza.style.setProperty('--h', `${6 + Math.random() * 6}px`);
+      pieza.style.setProperty('--c', colores[Math.floor(Math.random() * colores.length)]);
+      pieza.style.setProperty('--delay', `${Math.random() * 0.15}s`);
+      confettiLayer.appendChild(pieza);
+    }
+    setTimeout(() => { if (confettiLayer) confettiLayer.innerHTML = ''; }, 1800);
+  }
+
+  // Cuenta regresiva optimizada basada en tiempo absoluto
+  const duracionCuenta = 6; // Segundos reducidos de 10 a 6 para mayor agilidad móvil
+  const inicioCuenta = Date.now();
+  let cuentaTerminada = false;
+
+  function actualizarCuenta() {
+    if (cuentaTerminada) return;
+    const transcurrido = Math.floor((Date.now() - inicioCuenta) / 1000);
+    const restante = Math.max(0, duracionCuenta - transcurrido);
+    
+    if (countdown) countdown.textContent = restante;
+
+    if (restante === 0) {
+      cuentaTerminada = true;
+      if (countdown) countdown.style.display = 'none';
+      if (countdownMessage) countdownMessage.style.display = 'none';
+      if (countdownFinal) countdownFinal.classList.add('active');
+
+      if (starFlight) starFlight.classList.add('fly');
+
+      setTimeout(() => {
+        if (babyTrigger) babyTrigger.classList.add('show');
+        if (babyMessage) babyMessage.classList.add('show');
+        lanzarConfeti();
+      }, 5500);
+    } else {
+      setTimeout(actualizarCuenta, 1000); // Se ejecuta exactamente cada 1 segundo en lugar de cada 100ms
+    }
+  }
+
+  actualizarCuenta();
+
+  let mensajeAbriendose = false;
+  if (babyTrigger) {
+    babyTrigger.addEventListener('click', () => {
+      if (mensajeAbriendose) return;
+      mensajeAbriendose = true;
+      
+      iniciarMusicaCarta();
+      if (babyMessage) babyMessage.style.display = 'none';
+
+      if (sparkle) {
+        sparkle.classList.remove('burst');
+        void sparkle.offsetWidth;
+        sparkle.classList.add('burst');
+      }
+
+      babyTrigger.style.opacity = '0';
+      babyTrigger.style.visibility = 'hidden';
+
+      setTimeout(() => {
+        if (modal) {
+          modal.classList.add('open');
+          const letterBox = modal.querySelector('.letter');
+          if (letterBox) letterBox.scrollTop = 0;
+        }
+        if (closeButton) closeButton.focus();
+      }, 200);
+    });
+  }
+
+  function closeLetter() {
+    if (!modal || !modal.classList.contains('open')) return;
+    
+    detenerMusicaCarta();
+    modal.classList.remove('open');
+
+    if (babyMessage) {
+      babyMessage.style.display = 'block';
+      babyMessage.classList.remove('show');
+      void babyMessage.offsetWidth;
+      babyMessage.classList.add('show');
+    }
+
+    if (babyTrigger) {
+      babyTrigger.style.visibility = 'visible';
+      babyTrigger.style.opacity = '1';
+    }
+    mensajeAbriendose = false;
+  }
+
+  if (closeButton) closeButton.addEventListener('click', closeLetter);
+  if (modal) {
+    modal.addEventListener('click', event => {
+      if (event.target === modal) closeLetter();
+    });
+  }
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && modal && modal.classList.contains('open')) {
+      closeLetter();
+    }
+  });
+})();
+</script>
+</body>
+</html>
